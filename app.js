@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,9 +10,52 @@ var usersRouter = require('./routes/users');
 var bookRouter = require('./routes/book');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-
+var book=require("./models/book");
+var resourceRouter = require('./routes/resource')
 
 var app = express();
+
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+async function recreateDB(){
+  // Delete everything
+  await book.deleteMany();
+  let instance1 = new 
+  book({book_Name:"All Chemist",published_Year:2013,book_Price:2000.0});
+  await instance1.save();
+  //instance1.save( function(err,doc) {
+  //if(err) return console.error(err);
+  console.log("First object saved")
+  //});
+ 
+  let instance2 = new 
+  book({book_Name:"Richdad",published_Year:2010,book_Price:1000.0});
+  await instance2.save();
+  //instance1.save( function(err,doc) {
+  //if(err) return console.error(err);
+  console.log("second object saved")
+  //});
+ 
+  let instance3 = new 
+  book({book_Name:"Winning friends",published_Year:2018,book_Price:2002.0});
+  await instance3.save();
+  //instance1.save( function(err,doc) {
+  //if(err) return console.error(err);
+  console.log("Third object saved")
+  //});
+ }
+ let reseed = true;
+ if (reseed) { recreateDB();}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +72,8 @@ app.use('/users', usersRouter);
 app.use('/book', bookRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
+
 
 
 // catch 404 and forward to error handler
