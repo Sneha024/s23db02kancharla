@@ -44,6 +44,28 @@ exports.book_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+    // Handle book create on POST.
+exports.book_create_post = async function(req, res) {
+console.log(req.body)
+let document = new book();
+// We are looking for a body, since POST does not have query parameters.
+// Even though bodies can be in many different formats, we will be picky
+// and require that it be a json object
+// {"book_type":"goat", "cost":12, "size":"large"}
+document.book_Name = req.body.book_Name;
+document.published_Year = req.body.published_Year;
+document.book_Price = req.body.book_Price;
+try{
+let result = await document.save();
+res.send(result);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
+
     
     
 
