@@ -65,8 +65,37 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
-
+exports.book_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await book.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
     
+//Handle Vehicle update form on PUT
+exports.book_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await book.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.book_Name)
+            toUpdate.book_Name = req.body.book_Name;
+        if (req.body.published_Year) toUpdate.published_Year = req.body.published_Year;
+        if (req.body.book_Price) toUpdate.book_Price = req.body.book_Price;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`);
+    }
+};
     
 
     
