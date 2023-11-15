@@ -12,14 +12,14 @@ block content
 
   - let actionid = "/resource/book/" + bookid
   form(id='bookForm', action= actionid, method="PUT")
-    div.form-group
-      label.bookAttr(for='book_Name') Book Name:
+    div.form-group-create
+      label.bookTAttr(for='book_Name') Book Name:
       input#book_Name(type='text', name='book_Name', value=book_Name)
-    div.form-group
-      label.bookAttr(for='bookpublished_Year') Book Published Year:
+    div.form-group-create
+      label.bookTAttr(for='bookpublished_Year') Book Published Year:
       input#bookpublished_Year(type='text', name='bookpublished_Year', value=bookpublished_Year)
-    div.form-group
-      label.bookAttr(for='bookPrice') Book Price:
+    div.form-group-create
+      label.bookTAttr(for='bookPrice') Book Price:
       input#bookPrice(type='number', name='bookPrice', value=bookPrice)
     input(type="submit")
   script.
