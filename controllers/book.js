@@ -75,20 +75,9 @@ exports.book_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
-/// Handle book delete on DELETE.
-exports.book_delete = async function(req, res) {
-    console.log("delete " + req.params.id)
-    try {
-    result = await book.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
-    } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
-    }
-    };
+
     
-//Handle Vehicle update form on PUT
+//Handle book update form on PUT
 exports.book_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body 
 ${JSON.stringify(req.body)}`)
@@ -106,6 +95,19 @@ ${JSON.stringify(req.body)}`)
         res.status(500)
         res.send(`{"error": ${err}: Update for id ${req.params.id} 
 failed`);
+    }
+
+};
+// Handle book delete on DELETE.
+exports.book_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await book.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
     }
 };
     
