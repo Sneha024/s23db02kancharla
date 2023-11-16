@@ -6,14 +6,27 @@ body {
 a {
   color: #00B7FF;
 }
-.bookTAttr {
+.bookAttr {
   background-color: aquamarine;
   width: 120px;
 }
 .form-group-create {
   width:fit-content;
-  background-color: palegreen;
+  background-color: palevioletred;
   padding: 5px;
 }
+.bookAttr1 {
+  background-color: lemonchiffon;
+  width: 120px;
+}
+
+.bookAttr2 {
+  background-color: violet;
+  width: 120px;
+}
+
+
+
+
 
   
