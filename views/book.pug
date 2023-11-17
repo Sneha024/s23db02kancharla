@@ -2,14 +2,31 @@ extends layout
 
 block content
   h1= title
-  
-   - var results=[{book_Name:"All Chemist",published_Year:2013,book_Price:2000.0},{book_Name:"Richdad",published_Year:2010,book_Price:1000.0},{book_Name:"Winning friends",published_Year:2018,book_Price:2002.0}]
+
+  script.
+    var results = [
+      { _id: 'someObjectId1', book_Name: "All Chemist", published_Year: 2013, book_Price: 2000.0 },
+      { _id: 'someObjectId2', book_Name: "Richdad", published_Year: 2010, book_Price: 1000.0 },
+      { _id: 'someObjectId3', book_Name: "Winning friends", published_Year: 2018, book_Price: 2002.0 }
+    ];
+
   div(class="container-fluid")
-  div(class="row")
-   each s,index in results
-    div(class="col-sm-2" onclick=`buy(${index})`) #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
-    script.
-        function buy(a)
-        {
-            alert(`You purchased Item ${a+1}`)
-        }
+    div(class="row")
+      each s, index in results
+        div(class="col-sm-2" onclick=`buy(${index})`) #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
+          - let destination = `/book/update?id=${s._id}`
+          div(class="col-sm-2", onclick=`buy(${s})`) #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
+          button.btn(class="btn-primary ml-1", onclick=`dispatch('${destination}')`) Update
+
+  script.
+    function buy(a) {
+      alert(`You purchased Item ${a.book_Name}`);
+    }
+    function dispatch(path) {
+      window.location.href = path;
+    }
+
+  script.
+    function buy(a) {
+      alert(`You purchased Item ${a + 1}`);
+    }
