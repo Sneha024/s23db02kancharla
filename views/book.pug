@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  a(class="btn btn-success" href="/book/create") Create
 
   script.
     var results = [
@@ -13,10 +14,14 @@ block content
   div(class="container-fluid")
     div(class="row")
       each s, index in results
-        div(class="col-sm-2" onclick=`buy(${index})`) #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
+        div(class="col-sm-2" onclick=`buy(${index})`)
+          | #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
           - let destination = `/book/update?id=${s._id}`
-          div(class="col-sm-2", onclick=`buy(${s})`) #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
+          div(class="col-sm-2" onclick=`buy(${s})`)
+            | #{s.book_Name}, #{s.published_Year}, #{s.book_Price}
           button.btn(class="btn-primary ml-1", onclick=`dispatch('${destination}')`) Update
+          a(class="btn btn-danger" href=`/book/delete?id=${s._id}`) Delete
+          a(class="btn btn-dark" href=`/book/detail?id=${s._id}`) Details
 
   script.
     function buy(a) {

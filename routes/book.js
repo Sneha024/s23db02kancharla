@@ -14,10 +14,10 @@ res.redirect("/login");
 router.get('/', book_controllers.book_view_all_Page );
 module.exports = router;
 /* GET detail book page */
-router.get('/detail', book_controllers.book_view_one_Page);
+router.get('/detail',secured, book_controllers.book_view_one_Page);
 /* GET create book page */
-router.get('/create', book_controllers.book_create_Page);
+router.get('/create',secured, book_controllers.book_create_Page);
 /* GET create update page */
 router.get('/update',secured, book_controllers.book_update_Page);
 /* GET delete book page */
-router.get('/delete', book_controllers.book_delete_Page);
+router.get('/delete',secured, book_controllers.book_delete_Page);
